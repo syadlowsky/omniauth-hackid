@@ -20,7 +20,7 @@ module OmniAuth
       }
 
       option :access_token_options, {
-        :header_format => 'OAuth %s',
+        :mode => :query,
         :param_name => 'access_token'
       }
 
@@ -30,11 +30,11 @@ module OmniAuth
 
       info do
         prune!({
-          'nickname' => raw_info['username'],
+          'nickname' => raw_info['name'],
           'email' => raw_info['email'],
-          'name' => raw_info['username'],
-          'first_name' => raw_info['username'].split(" ")[0],
-          'last_name' => raw_info['username'].split(" ")[1],
+          'name' => raw_info['name'],
+          'first_name' => raw_info['name'].split(" ")[0],
+          'last_name' => raw_info['name'].split(" ")[1],
           'image' => "",
           #'description' => raw_info['bio'],
           'urls' => {
@@ -219,3 +219,5 @@ module OmniAuth
     end
   end
 end
+
+OmniAuth.config.add_camelization('hackid', 'HackID')

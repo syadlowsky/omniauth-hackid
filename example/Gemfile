@@ -1,4 +1,5 @@
 source :rubygems
 
 gem 'sinatra'
-gem 'omniauth-facebook', :path => '../'
+gem 'debugger'
+gem 'omniauth-hackid', :path => '../'
