@@ -1,7 +1,11 @@
 require 'bundler/setup'
 require 'minitest/autorun'
 require 'mocha'
-require 'omniauth/strategies/facebook'
+require 'helper'
+require 'omniauth-hackid'
+require 'openssl'
+require 'base64'
+require 'omniauth/strategies/hackid'
 
 OmniAuth.config.test_mode = true
 
@@ -44,7 +48,7 @@ class StrategyTestCase < TestCase
   def strategy
     @strategy ||= begin
       args = [@client_id, @client_secret, @options].compact
-      OmniAuth::Strategies::Facebook.new(nil, *args).tap do |strategy|
+      OmniAuth::Strategies::HackID.new(nil, *args).tap do |strategy|
         strategy.stubs(:request).returns(@request)
       end
     end

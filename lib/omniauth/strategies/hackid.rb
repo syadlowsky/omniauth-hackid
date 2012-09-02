@@ -5,13 +5,13 @@ require 'rack/utils'
 
 module OmniAuth
   module Strategies
-    class Facebook < OmniAuth::Strategies::OAuth2
+    class HackID < OmniAuth::Strategies::OAuth2
       class NoAuthorizationCodeError < StandardError; end
 
       DEFAULT_SCOPE = 'email'
 
       option :client_options, {
-        :site => 'https://graph.facebook.com',
+        :site => 'https://hackid.herokuapp.com',
         :token_url => '/oauth/access_token'
       }
 
@@ -32,16 +32,16 @@ module OmniAuth
         prune!({
           'nickname' => raw_info['username'],
           'email' => raw_info['email'],
-          'name' => raw_info['name'],
-          'first_name' => raw_info['first_name'],
-          'last_name' => raw_info['last_name'],
-          'image' => "#{options[:secure_image_url] ? 'https' : 'http'}://graph.facebook.com/#{uid}/picture?type=#{options[:image_size] || 'square'}",
-          'description' => raw_info['bio'],
+          'name' => raw_info['username'],
+          'first_name' => raw_info['username'].split(" ")[0],
+          'last_name' => raw_info['username'].split(" ")[1],
+          'image' => "",
+          #'description' => raw_info['bio'],
           'urls' => {
-            'Facebook' => raw_info['link'],
-            'Website' => raw_info['website']
+            #'Facebook' => raw_info['link'],
+            #'Website' => raw_info['website']
           },
-          'location' => (raw_info['location'] || {})['name'],
+          #'location' => (raw_info['location'] || {})['name'],
           'verified' => raw_info['verified']
         })
       end
@@ -96,7 +96,7 @@ module OmniAuth
       end
 
       # NOTE if we're using code from the signed request
-      # then FB sets the redirect_uri to '' during the authorize
+      # then HackID sets the redirect_uri to '' during the authorize
       # phase + it must match during the access_token phase:
       # https://github.com/facebook/php-sdk/blob/master/src/base_facebook.php#L348
       def callback_url
@@ -116,7 +116,7 @@ module OmniAuth
       # you need to set them dynamically. You can also set these options
       # in the OmniAuth config :authorize_params option.
       #
-      # /auth/facebook?display=popup&state=ABC
+      # /auth/hackid?display=popup&state=ABC
       #
       def authorize_params
         super.tap do |params|
