@@ -44,7 +44,7 @@ Here's an example *Auth Hash* available in `request.env['omniauth.auth']`:
 
 ```ruby
 {
-  :provider => 'facebook',
+  :provider => 'hackid',
   :uid => '1234567',
   :info => {
     :nickname => 'jbloggs',
