@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.authors  = ['Steve Yadlowsky']
   s.email    = ['grizlo42@gmail.com']
   s.summary  = 'HackID strategy for OmniAuth'
-  s.homepage = 'https://github.com/grizlo42/omniauth-hackid'
+  s.homepage = 'https://github.com/HackBerkeley/omniauth-hackid'
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
